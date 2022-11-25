@@ -21,15 +21,14 @@ ORGANIZATION = '{{ cookiecutter.organization }}'
 
 def generate_license():
     """Generates license file for the project."""
-    license_result = os.system(  # noqa: S605
+    if license_result := os.system(  # noqa: S605
         'lice {0} -o {1} -p {2} > {3}/LICENSE'.format(
             LICENSE.lower(),
             ORGANIZATION,
             PROJECT_NAME,
             PROJECT_DIRECTORY,
         ),
-    )
-    if license_result:  # it means that return code is not 0, print exception
+    ):
         print(license_result)  # noqa: WPS421
         sys.exit(1)
 
